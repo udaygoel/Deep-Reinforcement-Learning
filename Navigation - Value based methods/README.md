@@ -48,7 +48,7 @@ The details of the implementation and results can be found in `Report.md` .
 
 The project uses these files and folders:
 
-* Report.md: This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
+* [Report.md](Report.md): This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
 * [Navigation.ipynb]() : This Jupyter Notebook covers the project. It starts with the analysis of the environment and then trains the agent to solve the environment. There are multiple algorithms used for training and their performance is compared at the end of training. Finally the performance of the trained agent is observed by solving the environment over 100 episodes.
 * dqn_agent.py: script to create the Agent class. This class includes functions for training the agent, as well as providing an action given an environment state.
 * model.py: This script defines the deep neural network used to estimate the Q-values for each action, given an environment state.
