@@ -38,7 +38,7 @@ Follow the instructions below to set up and explore the environment.
 
 ### Instructions
 
-Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
+Once the environment has been set up, follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
 
 The details of the implementation and results can be found in `Report.md` . 
 
