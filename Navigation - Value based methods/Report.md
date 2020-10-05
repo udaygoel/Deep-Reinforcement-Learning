@@ -37,7 +37,7 @@ The project looks at 3 different algorithms of value-based methods to train the 
 
 For each algorithm, we try different combinations of hyperparameter values to identify the set of hyperparameter values that achieve the fastest training. The sizes of the Input Layer and the Hidden Layer are also hyperparameters. The code inputs these hyperparameters by reading a "hyperparameters.csv" file to a pandas dataframe and iterates through each row in the dataframe. Here is a list of the hyperparameters that can be changed:
 
-* E: Number of episodes for training
+* E: Number of episodes for training. This is not really a hyperparameter but is still provided to give the user more flexibility.
 * N: Memory size / Buffer size. Used for PER.
 * k: Frequency of training. That is, the number of steps after which to train the agent.
 * C: Frequency of updating the weights for Target Q Network. This is used for DDQN.
@@ -59,23 +59,74 @@ DDQN + PER implementation uses 5 combinations of values for (a, b, p_err) for ea
 
 
 
-The results of these 63 (9 + 9 + 45) combinations are then compared in 3 steps:
+The results of these 63 (9 + 9 + 45) combinations are then compared in 4 steps:
 
-1. The results of the DDQN+PER are first studied. Remember, we use 5 combinations of values for (a, b, p_err) for each of the 9 hyperparameter values combinations used by DQN and DDQN. In this step, we find the values of (a, b, p_err) that give the fastest training (the smallest episode to complete training) out of the 5 combinations. This reduces the results from a 45 row dataframe to a 9 row dataframe and allows us to compare the results with DQN and DDQN implementations. We can now check in next step the benefit PER added to the training by using the 9 row dataframe
+1. The results of the DDQN+PER are first studied. Remember, we use 5 combinations of values for (a, b, p_err) for each of the 9 hyperparameter values combinations used by DQN and DDQN. In this step, we find the values of (a, b, p_err) that give the fastest training (the smallest episode to complete training) out of the 5 combinations. This reduces the results from a 45 row dataframe to a 9 row dataframe and allows us to compare the results with DQN and DDQN implementations. We can now check in next step the benefit PER added to the training by using the 9 row dataframe. In cases where the agent does not complete training within the 2000 episodes (hyperparameter E), the "episode" value is NaN. 
 2. We combine the results of the 3 implementations. We keep track of the algo used by using 3 boolean columns, one each for DQN("dqn"), DDQN("ddqn") and PER("er"). The columns work as below: 
    - For DQN implementation, dqn column is True and rest are false.
    - For DDQN implementation, ddqn column is True and rest are false.
-   - For DDQN+PER implementation, dqn column is True and rest are false.
-3. sdfs
-4. sdf
+   - For DDQN+PER implementation, ddqn and er columns are True and dqn is false.
+3. We now have a total of 27 results. We can query these for the row with the minimum number of episodes required for training - the fastest training amongst all hyperparameter combinations. This turns out to be a DDQN+PER implementation and required 372 episodes only to complete the training. 
+4.  We can take the above 27 results and draw a plot to compare the results of the 3 algos. We do this by creating a vertical bar chart with the combinations of hyperparameters on the x-axis and the number of episodes on the y-axis. The results are separated by implementation and plotted on this chart. This chart can be seen below:
+
+![barchart_implemenations](images\barchart_implementations.png)
 
 
 
+We can make some observations from this chart:
+
+* DDQN+PER always performs best except in 1 case (see second from right) but even here it is a close second
+* DDQN does not always perform better than DQN. In one case, DDQN doesn't learn but DQN does
+* When learning rate is high, none of the implementations are able to train the agent.
+* For the one case, where DQN trains the agent but DDQN doesn't, DDQN+PER is still able to train. DDQN+PER actually trains faster than DQN. This shows that the experience replay can lead to robust training. 
 
 
-* Deep Q-Network (DQN): 
+
+### Plot of Rewards
+
+__Training__
+
+We plot the rewards per episode for the trained model with the least number of episodes. This model took 372 episodes to train. 
+
+Here's the plot of the rewards per episode during the training period:
+
+![plot_of_rewards_training](images\plot_of_rewards_training.png)
 
 
 
+__Testing__
 
+This model is then loaded from the saved checkpoint file 'checkpoint_ddqn_er_4.pth' to the agent's local Q-Network. The agent is then tested over 100 episodes with the environment in evaluation mode, i.e., train_mode = False
+
+The mean score from these 100 episodes is 13.42, which is above the +13 score needed to learn the environment in training mode.
+
+These are all the scores from 100 episodes in numeric form and in a chart plot:
+
+![rewards_eval](images\rewards_eval.png)
+
+![plot_of_rewards_eval](images\plot_of_rewards_eval.png)
+
+
+
+### Ideas for Future Work
+
+This project has tested 3 different algorithms to train the agent. There are other value based methods that can also be used for training:
+
+* Dueling DQN
+* Learning from Multi-step bootstrap targets
+* Distributional DQN
+* Noisy DQN
+* Rainbow - this is a combination of above 4, DDQN and PER.
+
+Each of the 6 extensions of the DQN network address a different issue with the original DQN algorithm. 
+
+In future work, all these extensions can be tried, either alone or in different combinations, to achieve even faster training.
+
+
+
+Another improvement could be to raise the threshold for solving environment from +13 to higher numbers, such as 16 or more. Different algorithms and hyperparameter combinations can be used to train the agent. This provides an agent with an even higher score. We may also see a bigger difference in performance (number of episodes) between the algorithms as we raise the bar higher to solve the environment. We may find that some algorithms (or combinations) just do not train the agent within a given number of episodes.
+
+
+
+Finally, a more challenging task would be to learn directly from pixels. In this project, the agent learned from information such as its velocity, along with ray-based perception of objects around its forward direction. In learning directly from pixels, the environment will be _almost_ identical to the project environment, where the only difference is that the state is an 84 x 84 RGB image, corresponding to the agent's first-person view of the environment. To solve this environment, we will need to design a convolutional neural network as the DQN architecture. 
 
