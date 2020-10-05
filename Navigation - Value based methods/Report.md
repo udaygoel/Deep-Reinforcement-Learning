@@ -62,11 +62,25 @@ DDQN + PER implementation uses 5 combinations of values for (a, b, p_err) for ea
 The results of these 63 (9 + 9 + 45) combinations are then compared in 4 steps:
 
 1. The results of the DDQN+PER are first studied. Remember, we use 5 combinations of values for (a, b, p_err) for each of the 9 hyperparameter values combinations used by DQN and DDQN. In this step, we find the values of (a, b, p_err) that give the fastest training (the smallest episode to complete training) out of the 5 combinations. This reduces the results from a 45 row dataframe to a 9 row dataframe and allows us to compare the results with DQN and DDQN implementations. We can now check in next step the benefit PER added to the training by using the 9 row dataframe. In cases where the agent does not complete training within the 2000 episodes (hyperparameter E), the "episode" value is NaN. 
+
+   
+
 2. We combine the results of the 3 implementations. We keep track of the algo used by using 3 boolean columns, one each for DQN("dqn"), DDQN("ddqn") and PER("er"). The columns work as below: 
+
    - For DQN implementation, dqn column is True and rest are false.
+
    - For DDQN implementation, ddqn column is True and rest are false.
+
    - For DDQN+PER implementation, ddqn and er columns are True and dqn is false.
-3. We now have a total of 27 results. We can query these for the row with the minimum number of episodes required for training - the fastest training amongst all hyperparameter combinations. This turns out to be a DDQN+PER implementation and requires just 372 episodes to complete the training. 
+
+     
+
+3. We now have a total of 27 results. We can query these for the row with the minimum number of episodes required for training - the fastest training amongst all hyperparameter combinations. This turns out to be a DDQN+PER implementation and requires just 372 episodes to complete the training. Below are the hyperparameters used for the training (ignore episode and score columns):
+
+   ![best_soln_hyperparameters](images/best_soln_hyperparameters.png)
+
+   
+
 4.  We can take the above 27 results and draw a plot to compare the performance of the 3 implementations. We do this by creating a vertical bar chart with the combinations of hyperparameters on the x-axis and the number of episodes required to train on the y-axis. The results are plotted for each implementation. This chart can be seen below:
 
 ![barchart_implemenations](images/barchart_implementations.png)
