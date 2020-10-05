@@ -69,7 +69,7 @@ The results of these 63 (9 + 9 + 45) combinations are then compared in 4 steps:
 3. We now have a total of 27 results. We can query these for the row with the minimum number of episodes required for training - the fastest training amongst all hyperparameter combinations. This turns out to be a DDQN+PER implementation and required 372 episodes only to complete the training. 
 4.  We can take the above 27 results and draw a plot to compare the results of the 3 algos. We do this by creating a vertical bar chart with the combinations of hyperparameters on the x-axis and the number of episodes on the y-axis. The results are separated by implementation and plotted on this chart. This chart can be seen below:
 
-![barchart_implemenations](images\barchart_implementations.png)
+![barchart_implemenations](images/barchart_implementations.png)
 
 
 
@@ -90,7 +90,7 @@ We plot the rewards per episode for the trained model with the least number of e
 
 Here's the plot of the rewards per episode during the training period:
 
-![plot_of_rewards_training](images\plot_of_rewards_training.png)
+![plot_of_rewards_training](images/plot_of_rewards_training.png)
 
 
 
@@ -102,9 +102,9 @@ The mean score from these 100 episodes is 13.42, which is above the +13 score ne
 
 These are all the scores from 100 episodes in numeric form and in a chart plot:
 
-![rewards_eval](images\rewards_eval.png)
+![rewards_eval](images/rewards_eval.png)
 
-![plot_of_rewards_eval](images\plot_of_rewards_eval.png)
+![plot_of_rewards_eval](images/plot_of_rewards_eval.png)
 
 
 
