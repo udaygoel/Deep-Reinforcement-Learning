@@ -9,15 +9,18 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-BUFFER_SIZE = int(1e6)     # replay buffer size
+BUFFER_SIZE = int(1e5)     # replay buffer size
 BATCH_SIZE = 128           # minibatch size
 GAMMA = .99                # discount factor
 TAU = 1e-3                 # for soft update of target parameters
 LR_ACTOR = 1e-4            # learning rate of the actor
 LR_CRITIC = 1e-3           # learning rate of the critic
 WEIGHT_DECAY = 0           # L2 weight decay
-UPDATE_EVERY = 20          # How often to update the network
+UPDATE_EVERY = 10           # How often to update the network
 UPDATE_TIMES = 10          # How many times to update the network each time
+
+EPSILON = 1.0              # epsilon for the noise process added to the actions
+EPSILON_DECAY = 1e-6       # decay for epsilon
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else 'cpu')
 
@@ -53,6 +56,7 @@ class Agent():
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=LR_CRITIC, weight_decay=WEIGHT_DECAY)
         
         # Noise process
+        self.epsilon = EPSILON
         self.noise = OUNoise(action_size, random_seed, num_agents)
         
         # Replay Memory
@@ -70,7 +74,8 @@ class Agent():
         self.actor_local.train()
         
         if add_noise:
-            action += self.noise.sample()
+            action += self.noise.sample() * np.maximum(self.epsilon, 0.2)
+        self.epsilon -= EPSILON_DECAY
         
         return np.clip(action, -1, 1)
     
@@ -164,10 +169,10 @@ class Agent():
 class OUNoise:
     """Ornstein-Uhlenbeck process."""
     
-    def __init__(self, action_size, seed, num_agents, mu=0., theta=0.5, sigma=0.5):
+    def __init__(self, action_size, seed, num_agents, mu=0., theta=0.2, sigma=0.25):
         """Initialize parameters and noise process."""
-        #self.mu = mu * np.ones((num_agents, action_size))
-        self.mu = mu * np.ones(action_size)
+        self.mu = mu * np.ones((num_agents, action_size))
+        #self.mu = mu * np.ones(action_size)
         self.theta = theta
         self.sigma = sigma
         self.seed = random.seed(seed)
@@ -180,8 +185,8 @@ class OUNoise:
     def sample(self):
         """Update internal state and return it as a noise sample"""
         x = self.state
-        #dx = self.theta * (self.mu - x) + self.sigma * np.random.random_sample(size=x.shape)
-        dx = self.theta * (self.mu - x) + self.sigma * np.array([random.random()-0.5 for i in range(len(x))])
+        dx = self.theta * (self.mu - x) + self.sigma * (np.random.standard_normal(size=x.shape))
+        #dx = self.theta * (self.mu - x) + self.sigma * np.array([random.random() for i in range(len(x))])
         self.state = x + dx
         return self.state
     
