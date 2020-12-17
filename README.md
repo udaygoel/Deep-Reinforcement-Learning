@@ -18,7 +18,7 @@ You can view and launch the following projects:
 
 - [MultiAgents Tennis - Collaboration and Competition](https://github.com/udaygoel/Deep-Reinforcement-Learning/tree/master/MultiAgents%20Tennis%20-%20Collaboration%20and%20Competition)
 
-  This project trains multiple agents (2) to play tennis using Multiple agent Actor Critic Method. The algorithm uses [Multi-Agent Deep Deterministic Policy Gradient (MADDPG)] (https://arxiv.org/abs/1706.02275) which is a multi-agent actor-critic algorithm for mixed cooperative-competitive environments. MADDPG is an extension of DDPG for the multi-agent setting. The objective of the agents is to achieve a maximum score (observed over the 2 agents) of at least +0.5 over 100 consecutive episodes.
+  This project trains multiple agents (2) to play tennis using Multiple agent Actor Critic Method. The algorithm uses [Multi-Agent Deep Deterministic Policy Gradient (MADDPG)](https://arxiv.org/abs/1706.02275) which is a multi-agent actor-critic algorithm for mixed cooperative-competitive environments. MADDPG is an extension of DDPG for the multi-agent setting. The objective of the agents is to achieve a maximum score (observed over the 2 agents) of at least +0.5 over 100 consecutive episodes.
 
 
 
