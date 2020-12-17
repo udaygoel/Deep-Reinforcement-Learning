@@ -74,8 +74,8 @@ The details of the implementation and results can be found in `Report.md`.
 
 The project uses these files:
 
-* [Report.md](): This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
-* [Continuous_Control.ipynb](): This Jupyter Notebook covers the project. It starts with the analysis of the environment and then trains the agent to solve the environment. The performance of the trained agent is observed by solving the environment over 100 episodes. The notebook also compares 3 implementations of the Ornstein-Uhlenbeck Process for generating noise samples. Further details about them can be found in the `Report.md` file.
+* [Report.md](https://github.com/udaygoel/Deep-Reinforcement-Learning/blob/master/Continuous%20Control%20-%20Actor%20Critic%20Methods/Report.md): This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
+* [Continuous_Control.ipynb](https://github.com/udaygoel/Deep-Reinforcement-Learning/blob/master/Continuous%20Control%20-%20Actor%20Critic%20Methods/Continuous_Control.ipynb): This Jupyter Notebook covers the project. It starts with the analysis of the environment and then trains the agent to solve the environment. The performance of the trained agent is observed by solving the environment over 100 episodes. The notebook also compares 3 implementations of the Ornstein-Uhlenbeck Process for generating noise samples. Further details about them can be found in the `Report.md` file.
 *  ddpg_agent.py: script to create the Agent class and covers both the actor and the critic. This class includes functions for training the agent, as well as providing an action given an environment state.
 * model.py: This script defines the deep neural network used for implementing the Actor and Critic networks. 
 * checkpoint_actor.pth: The saved state dictionary values of the trained actor.
