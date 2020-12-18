@@ -39,7 +39,7 @@ The project implements the [Multi-Agent Deep Deterministic Policy Gradients (MAD
 
 Here is the algorithm for MADDPG from the original paper:
 
-![maddpg_algo](images/maddpg_algo.png)
+![maddpg_algo](images/MADDPG_algo.png)
 
 
 
