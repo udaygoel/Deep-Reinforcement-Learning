@@ -38,7 +38,7 @@ Please follow the [instructions in the DRLND GitHub repository](https://github.c
    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)
    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
-   - Windows (64-bit): 
+   - Windows (64-bit):  [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
 
 3. Then, place the file in the `p3_collab-compet/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.
 
@@ -60,7 +60,7 @@ The details of the implementation and results can be found in `Report.md`.
 
 The project uses these files:
 
-* [Report.md](https://github.com/udaygoel/Deep-Reinforcement-Learning/blob/master/Continuous%20Control%20-%20Actor%20Critic%20Methods/Report.md): This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
+* [Report.md](https://github.com/udaygoel/Deep-Reinforcement-Learning/blob/master/MultiAgents%20Tennis%20-%20Collaboration%20and%20Competition/Report.md): This report describes the learning algorithm. It provides the details of the implementation, along with ideas for future work.
 * [Tennis.ipynb](https://github.com/udaygoel/Deep-Reinforcement-Learning/blob/master/MultiAgents%20Tennis%20-%20Collaboration%20and%20Competition/Tennis.ipynb): This Jupyter Notebook covers the project. It starts with the analysis of the environment and then trains the agent to solve the environment. The performance of the trained agent is observed by solving the environment over 100 episodes. The implementations builds on the DDPG algorithm implementation in [Continuous Control - Actor Critic Methods](https://github.com/udaygoel/Deep-Reinforcement-Learning/tree/master/Continuous%20Control%20-%20Actor%20Critic%20Methods) project and adds additional features to enable it to work for multiple agents. Further details about them can be found in the `Report.md` file.
 *  `maddpg_agent.py`: script to create the MultiAgent class. This script also includes the implementation for individual agents through the Agent class which covers both the actor and the critic. This class includes functions for training the agent, as well as providing an action given an environment state.
 * `model.py`: This script defines the deep neural network used for implementing the Actor and Critic networks. 
